@@ -11,25 +11,13 @@ import org.jzl.android.recyclerview.core.IViewHolder;
 public interface IListenerManagerBuilder<T, VH extends IViewHolder, B extends IListenerManagerBuilder<T, VH, B>> {
 
     @NonNull
-    default B addChildClickItemViewListener(IBindListener<VH, View.OnClickListener> bindListener, @NonNull OnClickItemViewListener<T, VH> clickItemViewListener, @NonNull IBindPolicy bindPolicy) {
-        return addCreatedViewHolderListener((options, viewHolderOwner) -> bindListener.bind(viewHolderOwner, v -> {
-            if (bindPolicy.match(viewHolderOwner.getContext())) {
-                clickItemViewListener.onClickItemView(options, viewHolderOwner);
-            }
-        }), IMatchPolicy.MATCH_POLICY_ALL);
+    default B addChildClickItemViewListener(IBindListener<VH, View.OnClickListener> bindListener, @NonNull OnClickItemViewListener<T, VH> clickItemViewListener, @NonNull IMatchPolicy matchPolicy) {
+        return addCreatedViewHolderListener((options, viewHolderOwner) -> bindListener.bind(viewHolderOwner, v -> clickItemViewListener.onClickItemView(options, viewHolderOwner)), matchPolicy);
     }
 
     @NonNull
-    default B addChildLongClickItemViewListener(IBindListener<VH, View.OnLongClickListener> bindListener, @NonNull OnLongClickItemViewListener<T, VH> longClickItemViewListener, IBindPolicy bindPolicy) {
-        return addCreatedViewHolderListener((options, viewHolderOwner) -> {
-            bindListener.bind(viewHolderOwner, v -> {
-                if (bindPolicy.match(viewHolderOwner.getContext())) {
-                    return longClickItemViewListener.onLongClickItemView(options, viewHolderOwner);
-                } else {
-                    return false;
-                }
-            });
-        }, IMatchPolicy.MATCH_POLICY_ALL);
+    default B addChildLongClickItemViewListener(IBindListener<VH, View.OnLongClickListener> bindListener, @NonNull OnLongClickItemViewListener<T, VH> longClickItemViewListener, IMatchPolicy matchPolicy) {
+        return addCreatedViewHolderListener((options, viewHolderOwner) -> bindListener.bind(viewHolderOwner, v -> longClickItemViewListener.onLongClickItemView(options, viewHolderOwner)), matchPolicy);
     }
 
     @NonNull
@@ -41,36 +29,29 @@ public interface IListenerManagerBuilder<T, VH extends IViewHolder, B extends IL
     }
 
     @NonNull
-    default B addClickItemViewListener(@NonNull OnClickItemViewListener<T, VH> clickItemViewListener, @NonNull IBindPolicy bindPolicy) {
+    default B addClickItemViewListener(@NonNull OnClickItemViewListener<T, VH> clickItemViewListener, @NonNull IMatchPolicy bindPolicy) {
         return addCreatedViewHolderListener((options, viewHolderOwner) -> {
             viewHolderOwner.getViewBinder().addClickListener(viewHolderOwner.getItemView(), v -> {
-                if (bindPolicy.match(viewHolderOwner.getContext())) {
                     clickItemViewListener.onClickItemView(options, viewHolderOwner);
-                }
             });
-        }, IMatchPolicy.MATCH_POLICY_ALL);
+        }, bindPolicy);
     }
 
     @NonNull
     default B addClickItemViewListener(@NonNull OnClickItemViewListener<T, VH> clickItemViewListener, @NonNull int... itemViewTypes) {
-        return addClickItemViewListener(clickItemViewListener, IBindPolicy.ofItemViewTypes(itemViewTypes));
+        return addClickItemViewListener(clickItemViewListener, IMatchPolicy.ofItemTypes(itemViewTypes));
     }
 
     @NonNull
-    default B addLongClickItemViewListener(@NonNull OnLongClickItemViewListener<T, VH> longClickItemViewListener, @NonNull IBindPolicy bindPolicy) {
+    default B addLongClickItemViewListener(@NonNull OnLongClickItemViewListener<T, VH> longClickItemViewListener, @NonNull IMatchPolicy matchPolicy) {
         return addCreatedViewHolderListener((options, viewHolderOwner) -> {
-            viewHolderOwner.getViewBinder().addLongClickListener(viewHolderOwner.getItemView(), v -> {
-                if (bindPolicy.match(viewHolderOwner.getContext())) {
-                    return longClickItemViewListener.onLongClickItemView(options, viewHolderOwner);
-                }
-                return false;
-            });
-        }, IMatchPolicy.MATCH_POLICY_ALL);
+            viewHolderOwner.getViewBinder().addLongClickListener(viewHolderOwner.getItemView(), v -> longClickItemViewListener.onLongClickItemView(options, viewHolderOwner));
+        }, matchPolicy);
     }
 
     @NonNull
     default B addLongClickItemViewListener(@NonNull OnLongClickItemViewListener<T, VH> longClickItemViewListener, int... itemViewTypes) {
-        return addLongClickItemViewListener(longClickItemViewListener, IBindPolicy.ofItemViewTypes(itemViewTypes));
+        return addLongClickItemViewListener(longClickItemViewListener, IMatchPolicy.ofItemTypes(itemViewTypes));
     }
 
     @NonNull

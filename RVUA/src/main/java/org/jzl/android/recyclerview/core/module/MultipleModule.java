@@ -45,8 +45,7 @@ public class MultipleModule<T, VH extends IViewHolder> implements IMultipleModul
     @Override
     public IOptions<T, VH> setup(@NonNull IConfiguration<?, ?> configuration, @NonNull IDataGetter<T> dataGetter) {
         IOptionsBuilder<T, VH> optionsBuilder = configuration.options(this, viewHolderFactory, dataGetter, listenerManager);
-        for (int i = 0; i < registrars.size(); i++) {
-            IRegistrar<T, VH> registrar = registrars.get(i);
+        for (IRegistrar<T, VH> registrar : registrars) {
             registrar.registered(configuration, optionsBuilder, dataGetter);
         }
         return optionsBuilder.build();

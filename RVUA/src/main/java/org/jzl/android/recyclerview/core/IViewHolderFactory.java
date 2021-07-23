@@ -18,4 +18,9 @@ public interface IViewHolderFactory<VH extends IViewHolder> {
         return DEFAULT_EMPTY_LAYOUT_VIEW_HOLDER_FACTORY;
     }
 
+    @NonNull
+    static IViewHolderFactory<IViewHolder> ofDefault(){
+        return (options, itemView, itemViewType) -> new DefaultViewHolder(itemView, itemViewType);
+    }
+
 }

@@ -16,7 +16,7 @@ public interface IBindPolicy {
 
     @NonNull
     static IBindPolicy ofPayloadsOrNotIncludedPayload(Object... payloads) {
-        return BIND_POLICY_NOT_INCLUDED_PAYLOADS.and(ofPayloads(payloads));
+        return BIND_POLICY_NOT_INCLUDED_PAYLOADS.or(ofPayloads(payloads));
     }
 
     @NonNull

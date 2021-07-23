@@ -29,4 +29,8 @@ public class DateUtils {
     public static void bindImageResource(ImageView imageView, int resId) {
         imageView.setImageResource(resId);
     }
+
+    public static String format(Date date){
+        return yyyy_MM_dd.format(date);
+    }
 }

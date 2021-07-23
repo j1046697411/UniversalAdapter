@@ -95,4 +95,6 @@ public interface IConfiguration<T, VH extends IViewHolder> extends IDataGetterOw
 
     @NonNull
     ExecutorService getExecutorService();
+
+    void rebind(@NonNull RecyclerView recyclerView);
 }

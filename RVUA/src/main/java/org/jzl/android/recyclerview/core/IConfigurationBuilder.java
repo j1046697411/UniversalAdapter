@@ -113,14 +113,6 @@ public interface IConfigurationBuilder<T, VH extends IViewHolder> extends IListe
     IConfigurationBuilder<T, VH> addCreatedViewHolderListener(@NonNull OnCreatedViewHolderListener<T, VH> createdViewHolderListener, @NonNull IMatchPolicy matchPolicy);
 
     @NonNull
-    @Override
-    IConfigurationBuilder<T, VH> addClickItemViewListener(@NonNull OnClickItemViewListener<T, VH> clickItemViewListener, @NonNull IBindPolicy bindPolicy);
-
-    @NonNull
-    @Override
-    IConfigurationBuilder<T, VH> addLongClickItemViewListener(@NonNull OnLongClickItemViewListener<T, VH> longClickItemViewListener, @NonNull IBindPolicy bindPolicy);
-
-    @NonNull
     IConfigurationBuilder<T, VH> plugin(@NonNull IPlugin<T, VH> plugin);
 
     @NonNull

@@ -1,7 +1,5 @@
 package org.jzl.android.recyclerview.core.plugins;
 
-import android.view.View;
-
 import androidx.annotation.NonNull;
 
 import org.jzl.android.recyclerview.core.IAdapterObservable;
@@ -17,10 +15,13 @@ import org.jzl.android.recyclerview.core.IViewHolder;
 import org.jzl.android.recyclerview.core.IViewHolderOwner;
 import org.jzl.android.recyclerview.core.components.IComponent;
 import org.jzl.android.recyclerview.model.ISelectable;
+import org.jzl.lang.fun.Predicate;
 import org.jzl.lang.util.ArrayUtils;
+import org.jzl.lang.util.CollectionUtils;
 import org.jzl.lang.util.ObjectUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public final class SelectPlugin<T extends ISelectable, VH extends IViewHolder> implements
@@ -34,7 +35,6 @@ public final class SelectPlugin<T extends ISelectable, VH extends IViewHolder> i
     private final IDataBinder<T, VH> dataBinder;
 
     private List<T> dataProvider;
-    private IDataGetter<T> dataGetter;
     private IAdapterObservable<T, VH> adapterObservable;
 
     private SelectPlugin(SelectMode selectMode, ISelectInterceptor<T, VH> selectInterceptor, IDataBinder<T, VH> dataBinder, IMatchPolicy matchPolicy) {
@@ -47,14 +47,13 @@ public final class SelectPlugin<T extends ISelectable, VH extends IViewHolder> i
     @Override
     public void setup(@NonNull IConfigurationBuilder<T, VH> builder) {
         builder.addCreatedViewHolderListener((options, viewHolderOwner) -> selectInterceptor.intercept(options, viewHolderOwner, this), matchPolicy)
-                .dataBinding(dataBinder, IBindPolicy.BIND_POLICY_NOT_INCLUDED_PAYLOADS.or(IBindPolicy.ofPayloads(PAYLOAD)).and(matchPolicy.toBindPolicy()))
+                .dataBinding(dataBinder, IBindPolicy.ofPayloadsOrNotIncludedPayload(PAYLOAD).and(matchPolicy.toBindPolicy()))
                 .addComponent(this);
     }
 
     @Override
     public void initialize(IConfiguration<T, VH> configuration) {
         this.dataProvider = configuration.getDataProvider();
-        this.dataGetter = configuration.getDataGetter();
         this.adapterObservable = configuration.getAdapterObservable();
     }
 
@@ -62,13 +61,18 @@ public final class SelectPlugin<T extends ISelectable, VH extends IViewHolder> i
         this.selectMode = ObjectUtils.get(selectMode, this.selectMode);
     }
 
+    @NonNull
+    public SelectMode getSelectMode() {
+        return selectMode;
+    }
+
     @Override
     public void checked(int position, boolean checked) {
         if (selectMode == SelectMode.SINGLE) {
             uncheckedAll();
         }
-        T data = dataGetter.getData(position);
-        if (ObjectUtils.nonNull(data)) {
+        T data = dataProvider.get(position);
+        if (ObjectUtils.nonNull(data) && data.isChecked() != checked) {
             data.checked(checked);
             adapterObservable.notifyItemRangeChanged(position, 1, PAYLOAD);
         }
@@ -84,10 +88,7 @@ public final class SelectPlugin<T extends ISelectable, VH extends IViewHolder> i
 
     @Override
     public void checkedAll() {
-        if (selectMode == SelectMode.SINGLE) {
-            return;
-        }
-        if (ObjectUtils.nonNull(dataProvider)) {
+        if (ObjectUtils.nonNull(dataProvider) && selectMode == SelectMode.MULTIPLE) {
             int startPosition = -1;
             int count = 0;
             for (int i = 0, size = dataProvider.size(); i < size; i++) {
@@ -108,15 +109,36 @@ public final class SelectPlugin<T extends ISelectable, VH extends IViewHolder> i
         }
     }
 
-    @NonNull
-    public final List<T> getSelectResult() {
-        List<T> result = new ArrayList<>();
-        for (T t : dataProvider) {
-            if (t.isChecked()) {
-                result.add(t);
+    @Override
+    public void checkedAll(@NonNull Predicate<T> predicate) {
+        if (CollectionUtils.nonEmpty(dataProvider) && selectMode == SelectMode.MULTIPLE) {
+
+            int startPosition = -1;
+            int count = 0;
+
+            for (int i = 0, size = dataProvider.size(); i < size; i++) {
+                T data = dataProvider.get(i);
+                boolean checked = predicate.test(data);
+                if (checked != data.isChecked()) {
+                    data.checked(checked);
+                    if (startPosition == -1) {
+                        startPosition = i;
+                        count = 1;
+                    } else {
+                        count++;
+                    }
+                } else {
+                    if (startPosition != -1) {
+                        notifyItemRangeChanged(startPosition, count);
+                        startPosition = -1;
+                        count = 0;
+                    }
+                }
+            }
+            if (startPosition != -1) {
+                notifyItemRangeChanged(startPosition, count);
             }
         }
-        return result;
     }
 
     private void notifyItemRangeChanged(int startPosition, int itemCount) {
@@ -146,6 +168,46 @@ public final class SelectPlugin<T extends ISelectable, VH extends IViewHolder> i
             }
             notifyItemRangeChanged(startPosition, count);
         }
+    }
+
+    @Override
+    public void reverseAll() {
+        if (CollectionUtils.nonEmpty(dataProvider) && selectMode == SelectMode.MULTIPLE) {
+            int startPosition = 0;
+            int count = 0;
+            boolean previous = false;
+            for (int i = 0, size = dataProvider.size(); i < size; i++) {
+                T data = dataProvider.get(i);
+                if (ObjectUtils.nonNull(data) && (data.isChecked() != previous || i == 0)) {
+                    if (i != 0) {
+                        notifyItemRangeChanged(startPosition, count);
+                    }
+                    previous = data.isChecked();
+                    startPosition = i;
+                    count = 1;
+                } else {
+                    count++;
+                }
+                data.checked(!data.isChecked());
+            }
+            notifyItemRangeChanged(startPosition, count);
+        }
+    }
+
+    @NonNull
+    @Override
+    public <C extends Collection<T>> C getSelectResult(@NonNull C result) {
+        for (T data : dataProvider) {
+            if (ObjectUtils.nonNull(data) && data.isChecked()) {
+                result.add(data);
+            }
+        }
+        return result;
+    }
+
+    @NonNull
+    public final List<T> getSelectResult() {
+        return getSelectResult(new ArrayList<>());
     }
 
 

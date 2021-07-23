@@ -13,13 +13,10 @@ import org.jzl.lang.util.holder.BinaryHolder;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class ListenerManager<T, VH extends IViewHolder> implements IListenerManager<T, VH> {
 
     private final List<BinaryHolder<IMatchPolicy, OnCreatedViewHolderListener<T, VH>>> createdViewHolderListeners = new CopyOnWriteArrayList<>();
-    private final List<BinaryHolder<IBindPolicy, OnClickItemViewListener<T, VH>>> clickItemViewListeners = new CopyOnWriteArrayList<>();
-    private final List<BinaryHolder<IBindPolicy, OnLongClickItemViewListener<T, VH>>> longClickItemViewListeners = new CopyOnWriteArrayList<>();
     private final List<BinaryHolder<IBindPolicy, OnViewAttachedToWindowListener<T, VH>>> viewAttachedToWindowListeners = new CopyOnWriteArrayList<>();
     private final List<BinaryHolder<IBindPolicy, OnViewDetachedFromWindowListener<T, VH>>> viewDetachedFromWindowListeners = new CopyOnWriteArrayList<>();
     private final List<BinaryHolder<IBindPolicy, OnViewRecycledListener<T, VH>>> viewRecycledListeners = new CopyOnWriteArrayList<>();
@@ -33,22 +30,6 @@ public final class ListenerManager<T, VH extends IViewHolder> implements IListen
             if (target.one.match(viewType)) {
                 target.two.onCreatedViewHolder(options, viewHolderOwner);
             }
-        });
-        viewHolderOwner.getViewBinder().addClickListener(viewHolderOwner.getItemView(), v -> {
-            ForeachUtils.each(clickItemViewListeners, target -> {
-                if (target.one.match(viewHolderOwner.getContext())) {
-                    target.two.onClickItemView(options, viewHolderOwner);
-                }
-            });
-        });
-        viewHolderOwner.getViewBinder().addLongClickListener(viewHolderOwner.getItemView(), v -> {
-            AtomicBoolean isLongClick = new AtomicBoolean(false);
-            ForeachUtils.each(longClickItemViewListeners, target -> {
-                if (target.one.match(viewHolderOwner.getContext()) && target.two.onLongClickItemView(options, viewHolderOwner)) {
-                    isLongClick.set(true);
-                }
-            });
-            return isLongClick.get();
         });
     }
 
@@ -91,13 +72,6 @@ public final class ListenerManager<T, VH extends IViewHolder> implements IListen
 
     @NonNull
     @Override
-    public IListenerManager<T, VH> addLongClickItemViewListener(@NonNull OnLongClickItemViewListener<T, VH> longClickItemViewListener, @NonNull IBindPolicy bindPolicy) {
-        this.longClickItemViewListeners.add(BinaryHolder.of(bindPolicy, longClickItemViewListener));
-        return this;
-    }
-
-    @NonNull
-    @Override
     public IListenerManager<T, VH> addViewAttachedToWindowListener(@NonNull OnViewAttachedToWindowListener<T, VH> viewAttachedToWindowListener, @NonNull IBindPolicy bindPolicy) {
         this.viewAttachedToWindowListeners.add(BinaryHolder.of(bindPolicy, viewAttachedToWindowListener));
         return this;
@@ -127,14 +101,6 @@ public final class ListenerManager<T, VH extends IViewHolder> implements IListen
     @Override
     public IListenerManager<T, VH> addViewRecycledListener(@NonNull OnViewRecycledListener<T, VH> viewRecycledListener, @NonNull IBindPolicy bindPolicy) {
         this.viewRecycledListeners.add(BinaryHolder.of(bindPolicy, viewRecycledListener));
-        return this;
-    }
-
-
-    @NonNull
-    @Override
-    public IListenerManager<T, VH> addClickItemViewListener(@NonNull OnClickItemViewListener<T, VH> clickItemViewListener, @NonNull IBindPolicy bindPolicy) {
-        this.clickItemViewListeners.add(BinaryHolder.of(bindPolicy, clickItemViewListener));
         return this;
     }
 

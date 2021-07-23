@@ -63,7 +63,7 @@ public abstract class AbstractMVVMViewHolder<V extends IView, VM extends IViewMo
 
     @Override
     public final Application getApplication() {
-        return viewHelper.getView().getApplication();
+        return parentContainerView.getApplication();
     }
 
     @NonNull

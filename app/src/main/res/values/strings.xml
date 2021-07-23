@@ -6,4 +6,11 @@
     <string name="adapter_animation">Adapter animation</string>
     <string name="click_me">点击我</string>
     <string name="multiple_type_adapter">Multiple Type Adapter</string>
+    <string name="more"><![CDATA[more >]]></string>
+    <string name="isfirstonly">IsFirstOnly</string>
+    <string name="loading">loading</string>
+    <string name="empty">empty</string>
+    <string name="o_ever_youthful_o_ever_weeping">O ever youthful,O ever weeping.</string>
+    <string name="shooting_stars">Shooting Stars</string>
+    <string name="_0">0</string>
 </resources>

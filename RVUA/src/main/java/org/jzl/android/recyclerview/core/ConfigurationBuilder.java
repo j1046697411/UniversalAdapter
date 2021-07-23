@@ -157,20 +157,6 @@ class ConfigurationBuilder<T, VH extends IViewHolder> implements IConfigurationB
 
     @NonNull
     @Override
-    public IConfigurationBuilder<T, VH> addClickItemViewListener(@NonNull OnClickItemViewListener<T, VH> clickItemViewListener, @NonNull IBindPolicy bindPolicy) {
-        listenerManager.addClickItemViewListener(clickItemViewListener, bindPolicy);
-        return this;
-    }
-
-    @NonNull
-    @Override
-    public IConfigurationBuilder<T, VH> addLongClickItemViewListener(@NonNull OnLongClickItemViewListener<T, VH> longClickItemViewListener, @NonNull IBindPolicy bindPolicy) {
-        listenerManager.addLongClickItemViewListener(longClickItemViewListener, bindPolicy);
-        return this;
-    }
-
-    @NonNull
-    @Override
     public IConfigurationBuilder<T, VH> addViewAttachedToWindowListener(@NonNull OnViewAttachedToWindowListener<T, VH> viewAttachedToWindowListener, @NonNull IBindPolicy bindPolicy) {
         listenerManager.addViewAttachedToWindowListener(viewAttachedToWindowListener, bindPolicy);
         return this;

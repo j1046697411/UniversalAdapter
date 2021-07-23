@@ -1,6 +1,11 @@
 package org.jzl.android.recyclerview.core.plugins;
 
+import androidx.annotation.NonNull;
 import org.jzl.android.recyclerview.model.ISelectable;
+import org.jzl.lang.fun.Predicate;
+
+import java.util.Collection;
+import java.util.List;
 
 public interface ISelector<T extends ISelectable> {
 
@@ -10,5 +15,15 @@ public interface ISelector<T extends ISelectable> {
 
     void checkedAll();
 
+    void checkedAll(@NonNull Predicate<T> predicate);
+
     void uncheckedAll();
+
+    void reverseAll();
+
+    @NonNull
+    <C extends Collection<T>> C getSelectResult(@NonNull C result);
+
+    @NonNull
+    List<T> getSelectResult();
 }

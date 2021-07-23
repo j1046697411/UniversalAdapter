@@ -23,15 +23,4 @@ public interface IListenerManager<T, VH extends IViewHolder> extends IListenerMa
 
     void notifyViewRecycled(@NonNull IOptions<T, VH> options, @NonNull IViewHolderOwner<VH> viewHolderOwner);
 
-    @NonNull
-    @Override
-    IListenerManager<T, VH> addLongClickItemViewListener(@NonNull OnLongClickItemViewListener<T, VH> longClickItemViewListener, @NonNull IBindPolicy bindPolicy);
-
-    @NonNull
-    @Override
-    IListenerManager<T, VH> addClickItemViewListener(@NonNull OnClickItemViewListener<T, VH> clickItemViewListener, @NonNull IBindPolicy bindPolicy);
-
-    @NonNull
-    @Override
-    IListenerManager<T, VH> addCreatedViewHolderListener(@NonNull OnCreatedViewHolderListener<T, VH> createdViewHolderListener, @NonNull IMatchPolicy bindPolicy);
 }

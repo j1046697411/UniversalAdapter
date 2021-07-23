@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.appcompat.widget.AppCompatImageView
-            android:src="@drawable/dog_183"
+            android:src="@mipmap/animation_img1"
             android:overScrollMode="ifContentScrolls"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"

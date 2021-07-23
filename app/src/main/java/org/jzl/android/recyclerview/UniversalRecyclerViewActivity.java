@@ -10,8 +10,8 @@ import org.jzl.android.mvvm.IViewBindingHelper;
 import org.jzl.android.mvvm.IViewBindingHelperFactory;
 import org.jzl.android.mvvm.view.core.AbstractMVVMActivity;
 import org.jzl.android.mvvm.vm.AbstractViewModel;
+import org.jzl.android.recyclerview.core.HomeView;
 import org.jzl.android.recyclerview.databinding.ActivityRevyclerViewBinding;
-import org.jzl.android.recyclerview.views.MainView;
 
 import java.lang.reflect.Constructor;
 
@@ -33,7 +33,7 @@ public class UniversalRecyclerViewActivity extends AbstractMVVMActivity<Universa
             Constructor<?> constructor = type.getConstructor(UniversalRecyclerViewActivity.class);
             return (IUniversalRecyclerView) constructor.newInstance(this);
         } catch (Throwable e) {
-            return new MainView(this);
+            return new HomeView(this);
         }
     }
 

@@ -17,12 +17,13 @@ import org.jzl.lang.util.ObjectUtils;
 
 public class AnimatorPlugin<T, VH extends IViewHolder> implements IPlugin<T, VH> {
 
-    private final IAnimatorFactory<VH> animatorFactory;
+    private IAnimatorFactory<VH> animatorFactory;
     private final IBindPolicy bindPolicy;
     private int lastPosition;
-    private long duration = 400;
+    private long duration = 300;
     private TimeInterpolator interpolator = new LinearInterpolator();
     private long delay = 0;
+    private boolean animationFirstOnly = false;
 
     private AnimatorPlugin(@NonNull IAnimatorFactory<VH> animatorFactory, @NonNull IBindPolicy bindPolicy) {
         this.animatorFactory = animatorFactory;
@@ -32,7 +33,7 @@ public class AnimatorPlugin<T, VH extends IViewHolder> implements IPlugin<T, VH>
     @Override
     public void setup(@NonNull IConfigurationBuilder<T, VH> builder) {
         builder.addViewAttachedToWindowListener((options, owner) -> {
-            if (lastPosition < owner.getContext().getAdapterPosition()) {
+            if (animationFirstOnly || lastPosition < owner.getContext().getAdapterPosition()) {
                 Animator animator = animatorFactory.animator(owner);
                 animator.setDuration(duration);
                 animator.setInterpolator(interpolator);
@@ -58,6 +59,18 @@ public class AnimatorPlugin<T, VH extends IViewHolder> implements IPlugin<T, VH>
     @NonNull
     public AnimatorPlugin<T, VH> setDelay(long delay) {
         this.delay = delay;
+        return this;
+    }
+
+    @NonNull
+    public AnimatorPlugin<T, VH> setAnimatorFactory(IAnimatorFactory<VH> animatorFactory) {
+        lastPosition = -1;
+        this.animatorFactory = ObjectUtils.get(animatorFactory, this.animatorFactory);
+        return this;
+    }
+
+    public AnimatorPlugin<T, VH> setAnimationFirstOnly(boolean animationFirstOnly) {
+        this.animationFirstOnly = animationFirstOnly;
         return this;
     }
 

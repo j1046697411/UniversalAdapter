@@ -68,15 +68,4 @@ public interface IOptionsBuilder<T, VH extends IViewHolder> extends IListenerMan
     @NonNull
     IOptionsBuilder<T, VH> setPriority(int priority);
 
-    @NonNull
-    @Override
-    IOptionsBuilder<T, VH> addCreatedViewHolderListener(@NonNull OnCreatedViewHolderListener<T, VH> createdViewHolderListener, @NonNull IMatchPolicy matchPolicy);
-
-    @NonNull
-    @Override
-    IOptionsBuilder<T, VH> addClickItemViewListener(@NonNull OnClickItemViewListener<T, VH> clickItemViewListener, @NonNull IBindPolicy bindPolicy);
-
-    @NonNull
-    @Override
-    IOptionsBuilder<T, VH> addLongClickItemViewListener(@NonNull OnLongClickItemViewListener<T, VH> longClickItemViewListener, @NonNull IBindPolicy bindPolicy);
 }
