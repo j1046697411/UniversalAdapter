@@ -1,0 +1,5 @@
+rootProject.name = "UniversalAdapter"
+include ':app'
+include ':RVUA'
+include ':MVVM'
+include ':RVUA-MVVM'

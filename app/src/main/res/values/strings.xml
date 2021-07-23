@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">UniversalAdapter</string>
+    <string name="optimize_adapter_code">Optimize adapter code</string>
+    <string name="item_click_listeners">Item click listeners</string>
+    <string name="click_msg">奇数位可点击，偶数位置可长按</string>
+    <string name="adapter_animation">Adapter animation</string>
+    <string name="click_me">点击我</string>
+    <string name="multiple_type_adapter">Multiple Type Adapter</string>
+</resources>
