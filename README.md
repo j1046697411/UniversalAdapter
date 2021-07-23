@@ -1,0 +1,2 @@
+# UniversalAdapter
+通用的recyclerview适配器，主要目标是易于扩展方便使用
