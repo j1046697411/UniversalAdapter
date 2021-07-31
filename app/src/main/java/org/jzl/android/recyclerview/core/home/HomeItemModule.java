@@ -43,7 +43,7 @@ public class HomeItemModule implements IModule<HomeItem, DefaultViewHolder> {
                     }
                     HomeItem homeItem = options.getDataGetter().getData(viewHolderOwner.getContext().getAdapterPosition());
                     Intent intent = new Intent(activity, UniversalRecyclerViewActivity.class);
-                    intent.putExtra(UniversalRecyclerViewActivity.TYPE_VIEW, homeItem.getType().getCanonicalName());
+                    intent.putExtra(UniversalRecyclerViewActivity.TYPE_VIEW, homeItem.getType().getName());
                     activity.startActivity(intent);
                 }))
                 .build();

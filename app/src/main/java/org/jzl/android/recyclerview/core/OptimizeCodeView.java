@@ -23,8 +23,6 @@ public class OptimizeCodeView extends AbstractView<UniversalRecyclerViewActivity
     @Override
     public void initialize(@NonNull ActivityRevyclerViewBinding activityRevyclerViewBinding, @NonNull RecyclerView recyclerView, @NonNull UniversalRecyclerViewActivity.IUniversalRecyclerViewModel universalRecyclerViewModel) {
         DataBlockProvider<Object> dataBlockProvider = DataBlockProviders.dataBlockProvider();
-        add(dataBlockProvider);
-
         IConfiguration.builder()
                 .setDataProvider(dataBlockProvider)
                 .createItemView(R.layout.item_animation)
@@ -37,6 +35,7 @@ public class OptimizeCodeView extends AbstractView<UniversalRecyclerViewActivity
                 })
                 .build(recyclerView);
 
+        add(dataBlockProvider);
     }
 
     public void add(Collection<?> collection) {

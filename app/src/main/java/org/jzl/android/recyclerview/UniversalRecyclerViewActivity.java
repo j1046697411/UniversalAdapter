@@ -2,6 +2,7 @@ package org.jzl.android.recyclerview;
 
 import android.content.Intent;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,7 @@ public class UniversalRecyclerViewActivity extends AbstractMVVMActivity<Universa
             Constructor<?> constructor = type.getConstructor(UniversalRecyclerViewActivity.class);
             return (IUniversalRecyclerView) constructor.newInstance(this);
         } catch (Throwable e) {
+            Log.e("-test-", e.getMessage(), e);
             return new HomeView(this);
         }
     }
