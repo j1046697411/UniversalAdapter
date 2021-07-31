@@ -65,6 +65,7 @@ public class HomeView extends AbstractView<UniversalRecyclerViewActivity> implem
         universalModels.add(UniversalModel.build(new HomeItem("代码复用的module模块功能", R.mipmap.gv_multiple_item, ModulesViews.ModulesView2.class)).setItemViewType(2).build());
         universalModels.add(UniversalModel.build(new HomeItem("代码复用的module模块功能", R.mipmap.gv_multiple_item, ModulesViews.ModulesView3.class)).setItemViewType(2).build());
 
+        universalModels.add(UniversalModel.build(new HomeItem("DataBinding", R.mipmap.gv_multiple_item, DataBindingView2.class)).setItemViewType(2).build());
 
     }
 

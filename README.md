@@ -45,7 +45,7 @@ IConfiguration.builder()
 
 ### 10、RecyclerView的各类基本事件（生命周期）
 
-### 11、dataBinding 的支持-衍生支持mvvm，需要配合mvvm框架使用
+### 11、[dataBinding 的支持](./docs/databinding_module.md)-[衍生支持mvvm，需要配合mvvm框架使用](./app/src/main/java/org/jzl/android/recyclerview/core/header)
 
 ### 12、diff的支持
 

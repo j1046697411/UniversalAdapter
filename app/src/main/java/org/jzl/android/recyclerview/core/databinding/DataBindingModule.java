@@ -1,20 +1,20 @@
 package org.jzl.android.recyclerview.core.databinding;
 
 import android.app.Activity;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import org.jzl.android.recyclerview.R;
-import org.jzl.android.recyclerview.core.IConfiguration;
-import org.jzl.android.recyclerview.core.IDataGetter;
-import org.jzl.android.recyclerview.core.IMatchPolicy;
-import org.jzl.android.recyclerview.core.IOptions;
+import org.jzl.android.recyclerview.core.*;
 import org.jzl.android.recyclerview.core.listeners.IBindListener;
 import org.jzl.android.recyclerview.core.module.IModule;
 import org.jzl.android.recyclerview.databinding.ItemMovieBinding;
 
-public class DataBindingModule implements IModule<DataBindingModel, DataBindingViewHolder<ItemMovieBinding>> {
+public class DataBindingModule implements IModule<DataBindingModel, DataBindingModule.DataBindingViewHolder<ItemMovieBinding>> {
     private final Activity activity;
     private final int[] itemViewTypes;
 
@@ -37,5 +37,18 @@ public class DataBindingModule implements IModule<DataBindingModel, DataBindingV
                     Toast.makeText(activity, "buy " + model.getTitle() + "(" + model.getPrice() + ")", Toast.LENGTH_SHORT).show();
                 }, IMatchPolicy.MATCH_POLICY_ALL)
                 .build();
+    }
+
+    public static class DataBindingViewHolder<VDB extends ViewDataBinding> implements IViewHolder {
+
+        private final VDB dataBinding;
+
+        public DataBindingViewHolder(View itemView) {
+            this.dataBinding = DataBindingUtil.bind(itemView);
+        }
+
+        public VDB getDataBinding() {
+            return dataBinding;
+        }
     }
 }
