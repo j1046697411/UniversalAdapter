@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.jzl.android.mvvm.view.AbstractView;
 import org.jzl.android.recyclerview.R;
 import org.jzl.android.recyclerview.UniversalRecyclerViewActivity;
-import org.jzl.android.recyclerview.core.header.Header;
-import org.jzl.android.recyclerview.core.header.HeaderModule;
+import org.jzl.android.recyclerview.core.header.HeaderFooterModel;
+import org.jzl.android.recyclerview.core.header.HeaderFooterModule;
 import org.jzl.android.recyclerview.core.home.HomeItem;
 import org.jzl.android.recyclerview.core.home.HomeItemModule;
 import org.jzl.android.recyclerview.core.layout.ILayoutManagerFactory;
@@ -35,13 +35,13 @@ public class HomeView extends AbstractView<UniversalRecyclerViewActivity> implem
         IConfiguration.<UniversalModel, IViewHolder>builder((options, itemView, itemViewType) -> new DefaultViewHolder(itemView, itemViewType))
                 .setDataProvider(dataBlockProvider)
                 .layoutManager(ILayoutManagerFactory.gridLayoutManager(2, GridLayoutManager.VERTICAL))
-                .registered(new HeaderModule(parentView, 1), Functions.universal())
+                .registered(new HeaderFooterModule(parentView, 1), Functions.universal())
                 .registered(new HomeItemModule(parentView, true, 2), Functions.universal())
                 .build(recyclerView);
     }
 
     public static void addHomes(Collection<UniversalModel> universalModels) {
-        universalModels.add(UniversalModel.build(new Header("UniversalAdapter基础功能", ""))
+        universalModels.add(UniversalModel.build(new HeaderFooterModel("UniversalAdapter基础功能", ""))
                 .setSpanSize(SpanSize.ALL)
                 .setItemViewType(1)
                 .build());
@@ -51,7 +51,7 @@ public class HomeView extends AbstractView<UniversalRecyclerViewActivity> implem
         universalModels.add(UniversalModel.build(new HomeItem("multiple item", R.mipmap.gv_multiple_item, MultipleTypeView.class)).setItemViewType(2).build());
         universalModels.add(UniversalModel.build(new HomeItem("item click", R.mipmap.gv_item_click, ItemClickView.class)).setItemViewType(2).build());
         universalModels.add(UniversalModel.build(new HomeItem("section", R.mipmap.gv_section, SelectView.class)).setItemViewType(2).build());
-        universalModels.add(UniversalModel.build(new HomeItem("header/footer", R.mipmap.gv_header_and_footer, null)).setItemViewType(2).build());
+        universalModels.add(UniversalModel.build(new HomeItem("header/footer", R.mipmap.gv_header_and_footer, HeaderFooterView.class)).setItemViewType(2).build());
         universalModels.add(UniversalModel.build(new HomeItem("data binding", R.mipmap.gv_databinding, DataBindingView.class)).setItemViewType(2).build());
     }
 

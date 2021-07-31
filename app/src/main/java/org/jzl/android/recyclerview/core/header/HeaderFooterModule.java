@@ -9,20 +9,20 @@ import org.jzl.android.recyclerview.core.IDataGetter;
 import org.jzl.android.recyclerview.core.IOptions;
 import org.jzl.android.recyclerview.core.module.IModule;
 
-public class HeaderModule implements IModule<Header, HeaderViewHolder> {
+public class HeaderFooterModule implements IModule<HeaderFooterModel, HeaderFooterViewHolder> {
 
     private final IExtendView<?, ?, ?> parentContainerView;
     private final int[] itemViewTypes;
 
-    public HeaderModule(@NonNull IExtendView<?, ?, ?> parentContainerView, int... itemViewTypes) {
+    public HeaderFooterModule(@NonNull IExtendView<?, ?, ?> parentContainerView, int... itemViewTypes) {
         this.parentContainerView = parentContainerView;
         this.itemViewTypes = itemViewTypes;
     }
 
     @NonNull
     @Override
-    public IOptions<Header, HeaderViewHolder> setup(@NonNull IConfiguration<?, ?> configuration, @NonNull IDataGetter<Header> dataGetter) {
-        return configuration.options(this, (options, itemView, itemViewType) -> new HeaderViewHolder(parentContainerView, itemView), dataGetter)
+    public IOptions<HeaderFooterModel, HeaderFooterViewHolder> setup(@NonNull IConfiguration<?, ?> configuration, @NonNull IDataGetter<HeaderFooterModel> dataGetter) {
+        return configuration.options(this, (options, itemView, itemViewType) -> new HeaderFooterViewHolder(parentContainerView, itemView), dataGetter)
                 .createItemView(R.layout.def_section_head, itemViewTypes)
                 .dataBindingByItemViewTypes((context, viewHolder, data) -> viewHolder.bindHeader(data), itemViewTypes)
                 .build();

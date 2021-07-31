@@ -17,8 +17,8 @@ import org.jzl.android.recyclerview.core.click.ItemClickModule;
 import org.jzl.android.recyclerview.core.databinding.DataBindingModel;
 import org.jzl.android.recyclerview.core.databinding.DataBindingModule;
 import org.jzl.android.recyclerview.core.empty.EmptyModule;
-import org.jzl.android.recyclerview.core.header.Header;
-import org.jzl.android.recyclerview.core.header.HeaderModule;
+import org.jzl.android.recyclerview.core.header.HeaderFooterModel;
+import org.jzl.android.recyclerview.core.header.HeaderFooterModule;
 import org.jzl.android.recyclerview.core.home.HomeItem;
 import org.jzl.android.recyclerview.core.home.HomeItemModule;
 import org.jzl.android.recyclerview.core.layout.IEmptyLayoutManager;
@@ -70,7 +70,7 @@ public class MultipleTypeView extends AbstractView<UniversalRecyclerViewActivity
                 .registered(new AnimationModule(1), Functions.universal())
                 .registered(new HomeItemModule(parentView, false, 2), Functions.universal())
                 .registered(new DataBindingModule(parentView, 3), Functions.universal())
-                .registered(new HeaderModule(parentView, 4), Functions.universal())
+                .registered(new HeaderFooterModule(parentView, 4), Functions.universal())
                 .registered(new ItemClickModule(5, 6, parentView), Functions.universal())
                 .registered(new SelectModule(parentView, 7), Functions.universal())
                 .layoutManager(ILayoutManagerFactory.gridLayoutManager(2, GridLayoutManager.VERTICAL))
@@ -96,7 +96,7 @@ public class MultipleTypeView extends AbstractView<UniversalRecyclerViewActivity
             ).setItemViewType(3).setSpanSize(SpanSize.ALL).build());
 
             universalModels.add(UniversalModel.build(
-                    new Header("基础功能", "简单的类型")
+                    new HeaderFooterModel("基础功能", "简单的类型")
             ).setSpanSize(SpanSize.ALL).setItemViewType(4).build());
 
             universalModels.add(UniversalModel.build(

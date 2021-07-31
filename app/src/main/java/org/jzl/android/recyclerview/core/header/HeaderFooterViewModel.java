@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import org.jzl.android.mvvm.vm.AbstractViewModel;
 import org.jzl.android.recyclerview.R;
 
-public class HeaderViewModel extends AbstractViewModel<IHeaderView> {
+public class HeaderFooterViewModel extends AbstractViewModel<IHeaderFooterView> {
 
     public final MutableLiveData<String> title = new MutableLiveData<>();
     public final MutableLiveData<String> description = new MutableLiveData<>();

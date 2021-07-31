@@ -2,14 +2,14 @@ package org.jzl.android.recyclerview.core.header;
 
 import java.io.Serializable;
 
-public class Header implements Serializable {
+public class HeaderFooterModel implements Serializable {
     private String title;
     private String description;
 
-    public Header() {
+    public HeaderFooterModel() {
     }
 
-    public Header(String title, String description) {
+    public HeaderFooterModel(String title, String description) {
         this.title = title;
         this.description = description;
     }

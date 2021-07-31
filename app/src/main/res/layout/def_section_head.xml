@@ -2,8 +2,8 @@
 
     <data>
         <variable
-            name="headerViewModel"
-            type="org.jzl.android.recyclerview.core.header.HeaderViewModel" />
+            name="headerFooterViewModel"
+            type="org.jzl.android.recyclerview.core.header.HeaderFooterViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,7 +35,7 @@
                 android:textColor="@color/txt_color"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="@{headerViewModel.title}"
+                android:text="@{headerFooterViewModel.title}"
                 tools:text="@string/app_name" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -45,7 +45,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:gravity="end|center"
-                android:text="@{headerViewModel.description}"
+                android:text="@{headerFooterViewModel.description}"
                 android:textColor="@color/color_light_blue"
                 android:textSize="18sp" />
         </LinearLayout>
