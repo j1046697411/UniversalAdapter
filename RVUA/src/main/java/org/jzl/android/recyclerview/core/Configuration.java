@@ -20,6 +20,7 @@ import org.jzl.android.recyclerview.core.listeners.OnViewAttachedToWindowListene
 import org.jzl.android.recyclerview.core.listeners.OnViewDetachedFromWindowListener;
 import org.jzl.android.recyclerview.core.listeners.OnViewRecycledListener;
 import org.jzl.android.recyclerview.core.module.IAdapterModule;
+import org.jzl.android.recyclerview.util.datablock.DataBlockProviders;
 import org.jzl.lang.util.ObjectUtils;
 
 import java.util.List;
@@ -46,7 +47,7 @@ class Configuration<T, VH extends IViewHolder> implements IConfiguration<T, VH>,
     Configuration(ConfigurationBuilder<T, VH> builder, LayoutInflater layoutInflater) {
         this.dataClassifier = builder.dataClassifier;
         this.identityProvider = builder.identityProvider;
-        this.dataProvider = builder.dataProvider;
+        this.dataProvider = ObjectUtils.get(builder.dataProvider, DataBlockProviders::dataBlockProvider);
         this.layoutInflater = layoutInflater;
         this.listenerManager = builder.listenerManager;
         this.componentManager = builder.componentManager;

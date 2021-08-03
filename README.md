@@ -7,7 +7,7 @@ UniversalAdapter 一个既可以很简单，又可以很复杂的通用适配器
 ### 1、快速导包
 
 ### 2、[快速入门](./app/src/main/java/org/jzl/android/recyclerview/core/OptimizeCodeView.java)
-``` java 
+```
 DataBlockProvider<Object> dataBlockProvider = DataBlockProviders.dataBlockProvider();
 IConfiguration.builder()
         .setDataProvider(dataBlockProvider)

@@ -61,11 +61,13 @@ public class HomeView extends AbstractView<UniversalRecyclerViewActivity> implem
         universalModels.add(UniversalModel.build(new HomeItem("简单的多类型", R.mipmap.gv_multiple_item, SimpleMultipleTypeView.class)).setItemViewType(2).build());
         universalModels.add(UniversalModel.build(new HomeItem("不同类型数据的多类型列表", R.mipmap.gv_multiple_item, SimpleMultipleTypeView2.class)).setItemViewType(2).build());
 
-        universalModels.add(UniversalModel.build(new HomeItem("代码复用的module模块功能", R.mipmap.gv_multiple_item, ModulesViews.ModulesView1.class)).setItemViewType(2).build());
-        universalModels.add(UniversalModel.build(new HomeItem("代码复用的module模块功能", R.mipmap.gv_multiple_item, ModulesViews.ModulesView2.class)).setItemViewType(2).build());
-        universalModels.add(UniversalModel.build(new HomeItem("代码复用的module模块功能", R.mipmap.gv_multiple_item, ModulesViews.ModulesView3.class)).setItemViewType(2).build());
+        universalModels.add(UniversalModel.build(new HomeItem("代码复用的module模块功能1", R.mipmap.gv_multiple_item, ModulesViews.ModulesView1.class)).setItemViewType(2).build());
+        universalModels.add(UniversalModel.build(new HomeItem("代码复用的module模块功能2", R.mipmap.gv_multiple_item, ModulesViews.ModulesView2.class)).setItemViewType(2).build());
+        universalModels.add(UniversalModel.build(new HomeItem("代码复用的module模块功能3", R.mipmap.gv_multiple_item, ModulesViews.ModulesView3.class)).setItemViewType(2).build());
 
         universalModels.add(UniversalModel.build(new HomeItem("DataBinding", R.mipmap.gv_multiple_item, DataBindingView2.class)).setItemViewType(2).build());
+
+        universalModels.add(UniversalModel.build(new HomeItem("简单的空布局", R.mipmap.gv_multiple_item, SimpleEmptyLayoutView.class)).setItemViewType(2).build());
 
     }
 
