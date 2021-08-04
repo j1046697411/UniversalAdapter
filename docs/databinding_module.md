@@ -81,4 +81,5 @@ public class DataBindingView2 extends AbstractView<UniversalRecyclerViewActivity
         }
 
     }
-}```
+}
+```

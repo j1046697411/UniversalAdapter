@@ -33,6 +33,8 @@ public class SimpleEmptyLayoutView extends AbstractView<UniversalRecyclerViewAct
         IConfiguration.<String, IViewHolder>builder(IViewHolderFactory.ofDefault())
                 .setDataProvider(dataBlockProvider)
                 .setDataClassifier((configuration, data, position) -> 1)
+
+                //自动通知跟新Item
                 .plugin(AutomaticNotificationPlugin.of())
 
                 //空布局插件

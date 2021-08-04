@@ -11,6 +11,9 @@ import org.jzl.android.mvvm.view.core.AbstractMVVMActivity;
 import org.jzl.android.mvvm.vm.AbstractViewModel;
 import org.jzl.android.recyclerview.app.core.HomeView;
 import org.jzl.android.recyclerview.app.databinding.ActivityRevyclerViewBinding;
+import org.jzl.android.recyclerview.core.IBindPolicy;
+import org.jzl.android.recyclerview.core.IConfiguration;
+import org.jzl.android.recyclerview.core.plugins.AnimatorPlugin;
 
 import java.lang.reflect.Constructor;
 

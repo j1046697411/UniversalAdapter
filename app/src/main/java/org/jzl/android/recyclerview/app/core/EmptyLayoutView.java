@@ -12,13 +12,13 @@ import org.jzl.android.recyclerview.app.R;
 import org.jzl.android.recyclerview.app.UniversalRecyclerViewActivity;
 import org.jzl.android.recyclerview.app.core.animation.Animation;
 import org.jzl.android.recyclerview.app.core.animation.AnimationModule;
-import org.jzl.android.recyclerview.app.core.empty.EmptyModule;
-import org.jzl.android.recyclerview.core.IConfiguration;
-import org.jzl.android.recyclerview.core.IViewHolder;
-import org.jzl.android.recyclerview.core.IViewHolderFactory;
+import org.jzl.android.recyclerview.core.*;
 import org.jzl.android.recyclerview.core.layout.IEmptyLayoutManager;
+import org.jzl.android.recyclerview.core.listeners.OnClickItemViewListener;
+import org.jzl.android.recyclerview.core.module.IModule;
 import org.jzl.android.recyclerview.core.plugins.AutomaticNotificationPlugin;
 import org.jzl.android.recyclerview.app.databinding.ActivityRevyclerViewBinding;
+import org.jzl.android.recyclerview.core.vh.DefaultViewHolder;
 import org.jzl.android.recyclerview.util.datablock.DataBlockProvider;
 import org.jzl.android.recyclerview.util.datablock.DataBlockProviders;
 
@@ -38,9 +38,12 @@ public class EmptyLayoutView extends AbstractView<UniversalRecyclerViewActivity>
     @Override
     public void initialize(@NonNull ActivityRevyclerViewBinding activityRevyclerViewBinding, @NonNull RecyclerView recyclerView, @NonNull UniversalRecyclerViewActivity.IUniversalRecyclerViewModel universalRecyclerViewModel) {
         IConfiguration.<Animation, IViewHolder>builder(IViewHolderFactory.ofDefault())
-                .setDataProvider(dataBlockProvider)
                 .setDataClassifier((configuration, data, position) -> 1)
+
+                .setDataProvider(dataBlockProvider)
                 .plugin(AutomaticNotificationPlugin.of())
+
+                //实现空布局插件
                 .plugin(IEmptyLayoutManager.of(IEmptyLayoutManager.DEFAULT_EMPTY_LAYOUT_ITEM_VIEW_TYPE, null, new EmptyModule<>((options, viewHolderOwner) -> {
                     viewHolderOwner.getViewBinder()
                             .setText(R.id.tv_msg, R.string.loading)
@@ -49,8 +52,17 @@ public class EmptyLayoutView extends AbstractView<UniversalRecyclerViewActivity>
                         add(dataBlockProvider);
                     }, 2000);
                 }, IEmptyLayoutManager.DEFAULT_EMPTY_LAYOUT_ITEM_VIEW_TYPE)))
+
                 .registered(new AnimationModule(1))
                 .build(recyclerView);
+
+        IConfiguration.builder()
+                //设置数据数据源
+                .setDataProvider(DataBlockProviders.dataBlockProvider())
+                //设置自动更新item插件
+                .plugin(AutomaticNotificationPlugin.of())
+                .build(recyclerView);
+
     }
 
     private void add(DataBlockProvider<Animation> dataBlockProvider) {
@@ -62,5 +74,25 @@ public class EmptyLayoutView extends AbstractView<UniversalRecyclerViewActivity>
             animations.add(animation);
         }
         dataBlockProvider.addAll(animations);
+    }
+
+    public static class EmptyModule<T> implements IModule<T, DefaultViewHolder> {
+
+        private final OnClickItemViewListener<T, DefaultViewHolder> clickItemViewListener;
+        private final int itemViewType;
+
+        public EmptyModule(OnClickItemViewListener<T, DefaultViewHolder> clickItemViewListener, int itemViewType) {
+            this.clickItemViewListener = clickItemViewListener;
+            this.itemViewType = itemViewType;
+        }
+
+        @NonNull
+        @Override
+        public IOptions<T, DefaultViewHolder> setup(@NonNull  IConfiguration<?, ?> configuration, @NonNull IDataGetter<T> dataGetter) {
+            return configuration.options(this, IViewHolderFactory.DEFAULT_EMPTY_LAYOUT_VIEW_HOLDER_FACTORY, dataGetter)
+                    .createItemView(R.layout.item_loading_view, itemViewType)
+                    .addClickItemViewListener(clickItemViewListener, itemViewType)
+                    .build();
+        }
     }
 }

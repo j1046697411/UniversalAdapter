@@ -1,31 +1,6 @@
-package org.jzl.android.recyclerview.app.core;
+# 选择插件示例
 
-import android.view.View;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import org.jzl.android.mvvm.view.AbstractView;
-import org.jzl.android.recyclerview.app.R;
-import org.jzl.android.recyclerview.app.UniversalRecyclerViewActivity;
-import org.jzl.android.recyclerview.core.IConfiguration;
-import org.jzl.android.recyclerview.core.IMatchPolicy;
-import org.jzl.android.recyclerview.core.IViewHolder;
-import org.jzl.android.recyclerview.core.IViewHolderFactory;
-import org.jzl.android.recyclerview.core.layout.ILayoutManagerFactory;
-import org.jzl.android.recyclerview.core.layout.SpanSize;
-import org.jzl.android.recyclerview.core.plugins.SelectPlugin;
-import org.jzl.android.recyclerview.app.core.select.SelectModule;
-import org.jzl.android.recyclerview.app.databinding.ActivityRevyclerViewBinding;
-import org.jzl.android.recyclerview.app.model.Card;
-import org.jzl.android.recyclerview.model.UniversalModel;
-import org.jzl.android.recyclerview.util.Functions;
-import org.jzl.android.recyclerview.util.datablock.DataBlockProvider;
-import org.jzl.android.recyclerview.util.datablock.DataBlockProviders;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
-
+```java
 public class SelectView extends AbstractView<UniversalRecyclerViewActivity> implements UniversalRecyclerViewActivity.IUniversalRecyclerView {
 
     SelectPlugin<UniversalModel, IViewHolder> selectPlugin;
@@ -100,3 +75,5 @@ public class SelectView extends AbstractView<UniversalRecyclerViewActivity> impl
     }
 
 }
+
+```

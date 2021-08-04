@@ -16,7 +16,6 @@ import org.jzl.android.recyclerview.app.core.animation.AnimationModule;
 import org.jzl.android.recyclerview.app.core.click.ItemClickModule;
 import org.jzl.android.recyclerview.app.core.databinding.DataBindingModel;
 import org.jzl.android.recyclerview.app.core.databinding.DataBindingModule;
-import org.jzl.android.recyclerview.app.core.empty.EmptyModule;
 import org.jzl.android.recyclerview.app.core.header.HeaderFooterModel;
 import org.jzl.android.recyclerview.app.core.header.HeaderFooterModule;
 import org.jzl.android.recyclerview.app.core.home.HomeItem;
@@ -53,7 +52,7 @@ public class MultipleTypeView extends AbstractView<UniversalRecyclerViewActivity
     public void initialize(@NonNull ActivityRevyclerViewBinding activityRevyclerViewBinding, @NonNull RecyclerView recyclerView, @NonNull UniversalRecyclerViewActivity.IUniversalRecyclerViewModel universalRecyclerViewModel) {
         DataBlockProvider<UniversalModel> dataBlockProvider = DataBlockProviders.dataBlockProvider();
 
-        IEmptyLayoutManager<UniversalModel, IViewHolder> layoutManager = IEmptyLayoutManager.of(IEmptyLayoutManager.DEFAULT_EMPTY_LAYOUT_ITEM_VIEW_TYPE, null, new EmptyModule<>((options, viewHolderOwner) -> {
+        IEmptyLayoutManager<UniversalModel, IViewHolder> layoutManager = IEmptyLayoutManager.of(IEmptyLayoutManager.DEFAULT_EMPTY_LAYOUT_ITEM_VIEW_TYPE, null, new EmptyLayoutView.EmptyModule<>((options, viewHolderOwner) -> {
             viewHolderOwner.getViewBinder()
                     .setText(R.id.tv_msg, R.string.loading)
                     .setVisibility(R.id.pb_progressBar, View.VISIBLE);
