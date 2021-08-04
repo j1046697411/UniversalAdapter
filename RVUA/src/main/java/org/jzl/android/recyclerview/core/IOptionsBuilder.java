@@ -4,9 +4,6 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 
 import org.jzl.android.recyclerview.core.listeners.IListenerManagerBuilder;
-import org.jzl.android.recyclerview.core.listeners.OnClickItemViewListener;
-import org.jzl.android.recyclerview.core.listeners.OnCreatedViewHolderListener;
-import org.jzl.android.recyclerview.core.listeners.OnLongClickItemViewListener;
 import org.jzl.lang.fun.Function;
 
 public interface IOptionsBuilder<T, VH extends IViewHolder> extends IListenerManagerBuilder<T, VH, IOptionsBuilder<T, VH>> {

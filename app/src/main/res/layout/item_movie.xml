@@ -5,7 +5,7 @@
     <data>
         <variable
             name="dataBindingModel"
-            type="org.jzl.android.recyclerview.core.databinding.DataBindingModel" />
+            type="org.jzl.android.recyclerview.app.core.databinding.DataBindingModel" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"

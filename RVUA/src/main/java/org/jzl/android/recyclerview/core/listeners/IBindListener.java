@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 
 import org.jzl.android.recyclerview.core.IViewHolder;
 import org.jzl.android.recyclerview.core.IViewHolderOwner;
-import org.jzl.lang.util.ObjectUtils;
 
 public interface IBindListener<VH extends IViewHolder, L> {
 

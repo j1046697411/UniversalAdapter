@@ -2,7 +2,7 @@
 <layout>
     <data>
 
-        <variable name="selectViewModel" type="org.jzl.android.recyclerview.core.select.SelectViewModel"/>
+        <variable name="selectViewModel" type="org.jzl.android.recyclerview.app.core.select.SelectViewModel"/>
 
     </data>
     <androidx.cardview.widget.CardView

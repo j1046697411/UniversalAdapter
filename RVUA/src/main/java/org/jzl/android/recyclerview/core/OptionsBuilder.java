@@ -4,10 +4,8 @@ import androidx.annotation.NonNull;
 
 import org.jzl.android.recyclerview.core.listeners.IListenerManager;
 import org.jzl.android.recyclerview.core.listeners.OnAttachedToRecyclerViewListener;
-import org.jzl.android.recyclerview.core.listeners.OnClickItemViewListener;
 import org.jzl.android.recyclerview.core.listeners.OnCreatedViewHolderListener;
 import org.jzl.android.recyclerview.core.listeners.OnDetachedFromRecyclerViewListener;
-import org.jzl.android.recyclerview.core.listeners.OnLongClickItemViewListener;
 import org.jzl.android.recyclerview.core.listeners.OnViewAttachedToWindowListener;
 import org.jzl.android.recyclerview.core.listeners.OnViewDetachedFromWindowListener;
 import org.jzl.android.recyclerview.core.listeners.OnViewRecycledListener;

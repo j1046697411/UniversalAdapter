@@ -1,7 +1,6 @@
 package org.jzl.android.recyclerview.core;
 
 import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
@@ -12,10 +11,8 @@ import org.jzl.android.recyclerview.core.components.IComponentManager;
 import org.jzl.android.recyclerview.core.layout.IRecyclerViewLayoutManager;
 import org.jzl.android.recyclerview.core.listeners.IListenerManager;
 import org.jzl.android.recyclerview.core.listeners.OnAttachedToRecyclerViewListener;
-import org.jzl.android.recyclerview.core.listeners.OnClickItemViewListener;
 import org.jzl.android.recyclerview.core.listeners.OnCreatedViewHolderListener;
 import org.jzl.android.recyclerview.core.listeners.OnDetachedFromRecyclerViewListener;
-import org.jzl.android.recyclerview.core.listeners.OnLongClickItemViewListener;
 import org.jzl.android.recyclerview.core.listeners.OnViewAttachedToWindowListener;
 import org.jzl.android.recyclerview.core.listeners.OnViewDetachedFromWindowListener;
 import org.jzl.android.recyclerview.core.listeners.OnViewRecycledListener;
@@ -25,7 +22,6 @@ import org.jzl.lang.util.ObjectUtils;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 class Configuration<T, VH extends IViewHolder> implements IConfiguration<T, VH>, IDataGetter<T> {
 

@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "org.jzl.android.recyclerview"
+        applicationId "org.jzl.android.recyclerview.app"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

@@ -2,9 +2,7 @@ package org.jzl.android.recyclerview.core.plugins;
 
 import android.animation.Animator;
 import android.animation.TimeInterpolator;
-import android.text.util.Linkify;
 import android.view.animation.LinearInterpolator;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 

@@ -7,7 +7,7 @@
 
         <variable
                 name="adapterAnimationViewModel"
-                type="org.jzl.android.recyclerview.UniversalRecyclerViewActivity.IUniversalRecyclerViewModel"/>
+                type="org.jzl.android.recyclerview.app.UniversalRecyclerViewActivity.IUniversalRecyclerViewModel"/>
 
     </data>
 

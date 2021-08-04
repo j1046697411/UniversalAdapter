@@ -3,7 +3,7 @@
     <data>
         <variable
             name="headerFooterViewModel"
-            type="org.jzl.android.recyclerview.core.header.HeaderFooterViewModel" />
+            type="org.jzl.android.recyclerview.app.core.header.HeaderFooterViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"

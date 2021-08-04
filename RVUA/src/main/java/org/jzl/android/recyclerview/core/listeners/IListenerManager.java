@@ -3,8 +3,6 @@ package org.jzl.android.recyclerview.core.listeners;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jzl.android.recyclerview.core.IBindPolicy;
-import org.jzl.android.recyclerview.core.IMatchPolicy;
 import org.jzl.android.recyclerview.core.IOptions;
 import org.jzl.android.recyclerview.core.IViewHolder;
 import org.jzl.android.recyclerview.core.IViewHolderOwner;

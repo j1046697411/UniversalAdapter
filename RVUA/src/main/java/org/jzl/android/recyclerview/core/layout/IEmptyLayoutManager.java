@@ -17,8 +17,6 @@ import org.jzl.android.recyclerview.util.Functions;
 import org.jzl.lang.fun.Function;
 import org.jzl.lang.util.ObjectUtils;
 
-import static org.jzl.android.recyclerview.core.IViewHolderFactory.DEFAULT_EMPTY_LAYOUT_VIEW_HOLDER_FACTORY;
-
 public interface IEmptyLayoutManager<T, VH extends IViewHolder> extends IPlugin<T, VH> {
 
     int DEFAULT_EMPTY_LAYOUT_ITEM_VIEW_TYPE = -1;
@@ -61,7 +59,7 @@ public interface IEmptyLayoutManager<T, VH extends IViewHolder> extends IPlugin<
 
     @NonNull
     static <T> IEmptyLayoutManager<T, IViewHolder> of(int emptyLayoutItemViewType, @LayoutRes int emptyLayoutResId) {
-        return of(emptyLayoutItemViewType, emptyLayoutResId, null, DEFAULT_EMPTY_LAYOUT_VIEW_HOLDER_FACTORY, DEFAULT_DATA_BINDER, target -> {
+        return of(emptyLayoutItemViewType, emptyLayoutResId, null, IViewHolderFactory.DEFAULT_EMPTY_LAYOUT_VIEW_HOLDER_FACTORY, DEFAULT_DATA_BINDER, target -> {
             if (target instanceof IDataOwner) {
                 return ((IDataOwner) target).getData();
             } else {
