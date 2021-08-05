@@ -1,5 +1,7 @@
 # UniversalAdapter
 
+[![](https://jitpack.io/v/j1046697411/UniversalAdapter.svg)](https://jitpack.io/#j1046697411/UniversalAdapter)
+
 UniversalAdapter 一个既可以很简单，又可以很复杂的通用适配器，该适配器致力于易用与可扩展。
 
 ## 使用
