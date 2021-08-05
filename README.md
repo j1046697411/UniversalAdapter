@@ -7,6 +7,20 @@ UniversalAdapter 一个既可以很简单，又可以很复杂的通用适配器
 ## 使用
 
 ### 1、快速导包
+```
+allprojects {
+        repositories {
+                //...
+                maven { url 'https://jitpack.io' }
+        }
+}
+
+dependencies {
+        implementation 'com.github.j1046697411:UniversalAdapter:0.0.1'
+}
+
+```
+
 
 ### 2、[快速入门](./app/src/main/java/org/jzl/android/recyclerview/app/core/OptimizeCodeView.java)
 
