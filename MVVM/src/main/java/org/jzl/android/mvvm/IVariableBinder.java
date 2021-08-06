@@ -7,6 +7,9 @@ import androidx.annotation.Nullable;
  */
 public interface IVariableBinder {
 
+    /**
+     * @see androidx.databinding.ViewDataBinding#setVariable(int, Object)
+     */
     void bindVariable(int variableId, @Nullable Object value);
 
 }
